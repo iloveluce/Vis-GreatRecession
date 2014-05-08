@@ -142,11 +142,11 @@ var colorScale = d3.scale.quantize()
 
 addLoading();
 queue()
-    .defer(d3.json, "../data/us-named.json")
-    .defer(d3.json, "../data/MonarchStyle5.json")
-    .defer(d3.json, "../data/LucianoPlusID.json")
-    .defer(d3.csv, "../data/eventsData.csv")
-    .defer(d3.csv, "../data/stateFlagMe.csv")
+    .defer(d3.json, "./data/us-named.json")
+    .defer(d3.json, "./data/MonarchStyle5.json")
+    .defer(d3.json, "./data/LucianoPlusID.json")
+    .defer(d3.csv, "./data/eventsData.csv")
+    .defer(d3.csv, "./data/stateFlagMe.csv")
     // .defer(d3.csv, "../data/d3.csv")
     .await(main);
 clearLoading();
