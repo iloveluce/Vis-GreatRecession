@@ -1,0 +1,67 @@
+// Define the tour!
+    var tour = {
+      id: "hello-hopscotch",
+      steps: [
+        {
+          title: "The Recession Tour",
+          content: "Take a tour to understand how to use this visualization to better see the Great Recession",
+          target:"mainheader",
+          placement: "right"
+        },
+        {
+          title: "Parallel Coordinates Button",
+          content: "Use these buttons to change the statistic you are visualizing. This changes the colors based on statistic choosen",
+          target: "paxistitle",
+          placement: "bottom",
+          //onNext: updateStatistic("GSP")
+        },
+         {
+          title: "Parallel Coordinates Brush",
+          content: "Here is where I put my content.",
+          target: "paxis",
+          placement: "right"
+        },
+        {
+          title: "Change Year",
+          content: "Here is where I put my content.",
+          target: "touryear",
+          placement: "top"
+          //onNext: 
+        },
+        {
+          title: "Axes by Year",
+          content: "Here is where I put my content.",
+          target: "by_state",
+          placement: "left"
+          //onNext: 
+        },
+        {
+          title: "Focus on One State",
+          content: "Here is where I put my content.",
+          target: "tourstate",
+          placement: "bottom",
+          onNext: zoomla
+        },
+        {
+          title: "State Analysis",
+          content: "Here is where I put my content.",
+          target: "eventsBar",
+          placement: "top"
+        },
+        {
+          title: "Line Graphs",
+          content: "Here is where I put my content.",
+          target: "svg-sline4",
+          placement: "right"
+        }
+      ]
+    };
+
+   
+    function zoomla(){
+      zoom(tourla)
+    }
+    function touryear(){
+      changeYear(d3.select("#touryear"))
+    }
+    

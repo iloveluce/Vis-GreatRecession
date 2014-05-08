@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Lost Decade: Visualizing the Great Recession Through US States from 2001 to 2011</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <!-- Thanks to https://github.com/linkedin/hopscotch -->
+        <link rel="stylesheet" href="./css/hopscotch.css">
+    </head>
+
+    <body>
+        <!-- Begin Navbar -->
+        <div id="wrapper">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a href="index.html" id="mainheader" class="navbar-brand">Visualizing the Great Recession Through The United States from 2001 to 2011</a>
+                </div>
+                <button type = "button" class = "btn btn-success navbar-btn " id = "by_state" onclick="activateModeButton()">Recalculate Axes per Year</button>
+                <button type = "button" class = "btn btn-success navbar-btn " id = "by_year" onclick="play()">Play</button>
+            <!-- <button type = "button" class = "btn btn-success navbar-btn activebutton" id = "by_year" onclick="activateModeButton()">Single year mode</button> -->
+              </div>
+            </nav>
+            <!-- End Navbar -->
+
+            <!-- Begin toplayer -->
+            <div id="toplayer">
+                <div id="svg-map"></div>
+                <div id="svg-parallel" class="vis"></div>
+                <div id="barchart"></div>
+                <div id="stateinfo"> <div id="insideinfo"></div>
+                    <br>
+                    <button type = "button" class = "btn btn-success navbar-btn" id = "zoom">Zoom Out</button>
+                </div>
+                <h3 id = "eventsBartitle" class = "hidden"> Relevant News Articles</h3>
+                <div id="eventsBar">
+                    <!--  <select id="eventsBarChangeIndicatorDropdown">
+                        <option value="Unemployment">Unemployment</option>
+                        <option value="HomeownerRates">Homeowner Rates</option>
+                        <option value="GSP">Gross State Product</option>
+                        <option value="burg_rate">Crime</option>
+                        <option value="busBankr">Bankruptcy</option>
+                        </select> -->
+                </div>
+            </div> 
+            <!-- End toplayer -->
+
+            <!-- Begin middlelayer -->
+            
+
+            <div id="yearbar">
+                <div class="yearsquare active y2001">2001</div>
+                <div class="yearsquare y2002">2002</div>
+                <div class="yearsquare y2003">2003</div>
+                <div class="yearsquare y2004">2004</div>
+                <div class="yearsquare y2005" id = "touryear">2005</div>
+                <div class="yearsquare y2006">2006</div>
+                <div class="yearsquare y2007">2007</div>
+                <div class="yearsquare y2008">2008</div>
+                <div class="yearsquare y2009">2009</div>
+                <div class="yearsquare y2010">2010</div>
+                <div class="yearsquare y2011">2011</div>
+            </div>
+            <!-- <div id="svg-line" class = "vis"></div> -->
+            <!-- End middlelayer -->
+            
+            <!-- Begin bottomlayer -->
+            <div id="bottomlayer">
+                <div class="minvisbucket">
+                    <div id="svg-sline4" class="minvis"></div>
+                    <div id="svg-sline3" class="minvis"></div>
+                    <div id="svg-sline2" class="minvis"></div>
+                    <div id="svg-sline1" class="minvis"></div>
+                    <div id="svg-sline0" class="minvis"></div>
+                </div>
+            <div id="explanation"></div>
+
+            </div>
+            <!-- End bottomlayer -->
+        </div>
+        <script>
+
+        </script>
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/loading.css">
+
+        <!-- Library Javascript Files -->
+        <script src="./libs/d3.min.js"></script>
+        <script src="./libs/queue.v1.min.js"></script>
+        <script src="./libs/topojson.v1.min.js"></script>
+        <script src="./libs/jquery-1.8.3.min.js"></script>
+        <script src="./libs/colorbrewer.v1.min.js"></script>
+        <script src="./libs/rainbowvis.js"></script>
+         <!-- Thanks to https://github.com/linkedin/hopscotch -->
+        <script src="./js/hopscotch.js"></script>
+
+        <!-- Application Javascript Files -->
+        <script src="./js/loading.js"></script>
+          <script src="./js/stateinfo.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./js/NYTapi.js"></script>
+        <script src="./js/linegraph.js"></script>
+        <script src="./js/smalllinegraph.js"></script>
+        <script src="./js/choropleth.js"></script>
+        <script src="./js/parallel.js"></script>
+        <script src="./js/tooltip.js"></script>
+        <script src="./js/events.js"></script>
+        <script src="./js/yearselector.js"></script>
+        <script src="./js/misc.js"></script>
+        <script src="./js/tour.js"></script>
+        
+    </body>
+</html>
