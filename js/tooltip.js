@@ -37,18 +37,18 @@ d3.selectAll(".map.state, .parallel.foreground, .stateline")
           stateid= d.code
           d3.selectAll("[line-statecode="+stateid+"]").classed("selectedline", false);
           d3.selectAll("[data-statecode=" +stateid+"]").classed("selectedline", false)
-           toolTipStop(d); 
+           toolTipStop(d);
       }
     })
    .on("click", function(d){
-            console.log(d)
+           //console.log(d)
            if(d){
             if(d.code)
               zoom(d3.select(".map"+"."+d.code)[0][0]["__data__"]);
             else
               zoom(d);
           }
-    
+
           });
 
 
@@ -82,7 +82,7 @@ function toolTipStart(data){
             return true;
           }})[0][currentIndicator];
         //console.log(currentData);
-        console.log(data);
+        //console.log(data);
         if(data.year && data.year instanceof Array){
           return ""+statename;
         } else {
@@ -95,7 +95,7 @@ function toolTipStart(data){
       .style("left", (event.pageX-100)+"px")
 }
 
-function toolTipMove(data){   
+function toolTipMove(data){
     tooltip
       .style("top", (+event.pageY-150)+"px")
       .style("left", (+event.pageX-100)+"px")
@@ -118,8 +118,8 @@ function toolTipStop(data){
 //TODO : Change diffs in main js file
 function initializeTooltipGraph(data){
 
-    
-  
+
+
   // tooltip.x.domain(data.map(function(d) { return d.name; }));
   // toolip.y.domain(d3.extent(data, function(d) { return d.value; })).nice();
 
@@ -138,7 +138,7 @@ function initializeTooltipGraph(data){
   //   .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
   //   .attr("height", y.rangeBand());
 
-    
+
     tooltip.x = d3.scale.linear()
         .range([0, tooltip.width])
 

@@ -1,5 +1,5 @@
 
-   
+
 //axis titles
 parallel.axistitle = {"Unemployment": "Unemployment", "HomeownerRates": "Home Vacancy", "busBankr": "Bankruptcy",
 "GSP": "Gross State Product", "burg_rate": "Burglary"}
@@ -10,7 +10,7 @@ parallel.axistitle = {"Unemployment": "Unemployment", "HomeownerRates": "Home Va
 //          draw Parallel Coordinates      //
 /////////////////////////////////////////////
 function initializeParallel(json, statistic){
-    
+
     parallel.statistic = statistic;
     //debug
 
@@ -40,8 +40,8 @@ function initializeParallel(json, statistic){
                 // if(datum[indicator] == undefined){
                 //     datum[indicator] = 0;
                 // }
-               
-               return [parallel.x(indicator), parallel.y[indicator](datum[indicator])]; 
+
+               return [parallel.x(indicator), parallel.y[indicator](datum[indicator])];
             } else {
 
             }
@@ -61,8 +61,8 @@ function initializeParallel(json, statistic){
              //   console.log(p);
                 return !parallel.y[p]
                     .brush
-                    .empty(); 
-        }); 
+                    .empty();
+        });
         }
             catch(e){
                 console.log(e.stack);
@@ -111,9 +111,9 @@ function initializeParallel(json, statistic){
     .append("g")
         .attr("transform", "translate(" + margin.parallel.left + "," + margin.parallel.top + ")");
 
-    //create parallel.dimensions    
+    //create parallel.dimensions
     parallel.dimensions = d3.keys(json[5]["states"][2]).filter(function(d){return d!="year" && d!="name" && d!="code"});
-    
+
     //create Max/Min extents
     d3.map(parallel.dimensions).values().forEach(function(dimension){
         // if (dimension!= "code" && dimension!="name" && dimension!="year"){
@@ -124,12 +124,12 @@ function initializeParallel(json, statistic){
                     valueCollection.push(+state[dimension]);
                 });
             });
-            
+
             parallel.minMax[dimension] = d3.extent(valueCollection);
             } else {
 
             // neeeeeeewwwwww
-                json[linegraph.value - 2001]["states"].forEach(function(state){ 
+                json[linegraph.value - 2001]["states"].forEach(function(state){
             //////////////////////json.forEach(function(year){
                 // console.log(year);
                 //////////////////year.states.forEach(function(state){
@@ -138,7 +138,7 @@ function initializeParallel(json, statistic){
             }
             parallel.minMax[dimension] = d3.extent(valueCollection);
         // }
-    console.log(d3.extent(valueCollection));
+    //console.log(d3.extent(valueCollection));
     })
 
 
@@ -149,15 +149,15 @@ function initializeParallel(json, statistic){
     //every parallel.y scale's domain is the extent (min and max) of all values within the json under that scale's corresponding header.
     parallel.dimensions
         .forEach(function(dimension){
-            if (dimension!= "code" && dimension!="name" && dimension!="year"){ 
-                (parallel.y[dimension] = d3.scale.linear() // if dimension is City, return false. 
+            if (dimension!= "code" && dimension!="name" && dimension!="year"){
+                (parallel.y[dimension] = d3.scale.linear() // if dimension is City, return false.
                     .domain(parallel.minMax[dimension])
                     .range([height.parallel,0])
                 )
             }
 
-            
-            // return d != "City" && (parallel.y[d] = d3.scale.linear() // if d is City, return false. 
+
+            // return d != "City" && (parallel.y[d] = d3.scale.linear() // if d is City, return false.
             //     .domain(d3.extent(json, function(p){ //Otherwise, create a linear scale & set it in parallel.y, and then return true.
             //         return +p[d];
             //     }))
@@ -234,7 +234,7 @@ function initializeParallel(json, statistic){
             if(i == 1)
                 return "paxis"
         });
-    
+
     parallelaxis.append("text")
         .attr("text-anchor", "middle")
         .attr("y", -9)
@@ -251,7 +251,7 @@ function initializeParallel(json, statistic){
     // Add and store a brush for each axis.
     parallel.g.append("g")
         .attr("class", "parallel brush")
-        .each(function(d) { 
+        .each(function(d) {
             d3.select(this)
                 .call(parallel.y[d].brush = d3.svg.brush().y(parallel.y[d])
                 .on("brush", parallel.brush)
@@ -270,7 +270,7 @@ function initializeParallel(json, statistic){
         .on("click", function(j){
 
             d3.selectAll(".parallel.dimension g.parallel.axis text[text-anchor = 'middle']").classed("active", false).style("fill", null)
-            console.log(globalStat)
+
             d3.select(this).classed("active", true).style("fill", spectrums[j][5]);;
             //updateline(j);
             //updatesmallline(j);
@@ -281,14 +281,14 @@ function initializeParallel(json, statistic){
         })
 
     //Color Unemployment
-    d3.select(".parallel.dimension g.parallel.axis text[text-anchor = 'middle']")  
+    d3.select(".parallel.dimension g.parallel.axis text[text-anchor = 'middle']")
         .classed("active", true)
 
 
 }
 
 function updateStatistic(j){
-    
+
 }
 //////////////////////////////////////
 //                                  //
@@ -316,8 +316,8 @@ d3.map(parallel.dimensions).values().forEach(function(dimension){
             parallel.minMax[dimension] = d3.extent(valueCollection);
             parallel.dimensions
             .forEach(function(dimension){
-                if (dimension!= "code" && dimension!="name" && dimension!="year"){ 
-                    (parallel.y[dimension] // if dimension is City, return false. 
+                if (dimension!= "code" && dimension!="name" && dimension!="year"){
+                    (parallel.y[dimension] // if dimension is City, return false.
                         .domain(parallel.minMax[dimension])
                     );
                 }
@@ -325,7 +325,7 @@ d3.map(parallel.dimensions).values().forEach(function(dimension){
             } else {
 
             // neeeeeeewwwwww
-                json[linegraph.value - 2001]["states"].forEach(function(state){ 
+                json[linegraph.value - 2001]["states"].forEach(function(state){
             //////////////////////json.forEach(function(year){
                 // console.log(year);
                 //////////////////year.states.forEach(function(state){
@@ -334,15 +334,16 @@ d3.map(parallel.dimensions).values().forEach(function(dimension){
 
                 parallel.dimensions
                     .forEach(function(dimension){
-                        if (dimension!= "code" && dimension!="name" && dimension!="year"){ 
-                            (parallel.y[dimension] // if dimension is City, return false. 
+                        if (dimension!= "code" && dimension!="name" && dimension!="year"){
+                            (parallel.y[dimension] // if dimension is City, return false.
                                 .domain(parallel.minMax[dimension])
                             );
                         }
                     });
             parallel.minMax[dimension] = d3.extent(valueCollection);
             }
-            console.log(d3.extent(valueCollection));
+
+
             //});
         // }
     });

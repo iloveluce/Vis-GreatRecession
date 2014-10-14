@@ -1,6 +1,6 @@
 function initializeStateinfo(stateflag){
 
-	
+
 	stateinfo = d3.select("#stateinfo");
 
 	stateinfo.classed("hidden", true);
@@ -13,15 +13,15 @@ function initializeStateinfo(stateflag){
 	//	.attr("margin-bottom", margin.events.bottom)
 	//	.attr("margin-left", margin.events.left)
 
-	
+
 	stateinfo.select("#insideinfo").append("h1")
 		.attr("class", "statetitle")
-        //.attr("x", (width.smalllinegraph ))             
+        //.attr("x", (width.smalllinegraph ))
         //.attr("y", 0 - (margin.smalllinegraph.top / 2) - 10)
-        .style("text-align", "center") 
+        .style("text-align", "center")
 
     stateinfo.select("#insideinfo").append("h4")
-    .style("text-align", "center") 	
+    .style("text-align", "center")
 		//.attr("class", "statetitle")
     //stateinfo.select("#insideinfo").append("br")
     stateinfo.select("#insideinfo").append("img")
@@ -31,7 +31,7 @@ function initializeStateinfo(stateflag){
 
 
     stateinfo.select("#insideinfo").append("p")
-    
+
     stateinfo.year=  2001
     stateinfo.flags = stateflag;
      d3.select('#zoom').on('click', function(){
@@ -45,9 +45,9 @@ function updateStateinfo(state, data){
 		stateinfo.classed("hidden", true)
 		return;
 	}
-	
 
-	
+
+
 	if(data){
 	stateinfo.classed("hidden", false)
 		if(stateinfo.data != data){
@@ -57,19 +57,19 @@ function updateStateinfo(state, data){
 	else if(stateinfo.year !=  yearselector.year){
 		stateinfo.year =  yearselector.year
 	}
-	
+
 	//stateinfo.data = data
 	//stateinfo.selectAll(".title").clear()
 	//console.log(stateinfo.select(".statetitle"))
 	//console.log(data)
-	console.log(stateinfo.flags)
+	//console.log(stateinfo.flags)
 	//stateinfo.select(".stateinfo").html('')
-	
+
 	stateinfo.select(".statetitle")
         .text(stateinfo.data.properties.name)
         //.style("text-align", "center")
 
-    stateinfo.select("h4")    
+    stateinfo.select("h4")
         //.append("h4")
         .text(stateinfo.year)
        // .style("text-align", "center")
@@ -81,29 +81,29 @@ function updateStateinfo(state, data){
     			 stateinfo.flags.forEach(function(d){
     				if(stateinfo.data.properties.code == d.Abbreviation){
     					sauce = d.web
-    					
+
     				}
-    					
+
     			})
     			 return sauce
     		})
 
-  
-	
-    
+
+
+
    	index = stateinfo.year - 2001;
    	//console.log(d3.select(".line."+stateinfo.properties.code)[0][0]["__data__"]["pop"][index])
-   	stateinfo.select("p").html("Population:&nbsp;&nbsp;" + numberWithCommas(d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["pop"][index]) + "<br>"+ 
-   		"Home Vacancy Rate:&nbsp;&nbsp;" +  d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["home"][index]+ "<br>"+ 
-   		"Real Gross State Product:&nbsp;&nbsp;" +  numberWithCommas(Math.round(d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["gsp"][index]))+ "<br>"+ 
-   		"Burglary Rate:&nbsp;&nbsp;" +  d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["crime"][index] + "<br>"+ 
+   	stateinfo.select("p").html("Population:&nbsp;&nbsp;" + numberWithCommas(d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["pop"][index]) + "<br>"+
+   		"Home Vacancy Rate:&nbsp;&nbsp;" +  d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["home"][index]+ "<br>"+
+   		"Real Gross State Product:&nbsp;&nbsp;" +  numberWithCommas(Math.round(d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["gsp"][index]))+ "<br>"+
+   		"Burglary Rate:&nbsp;&nbsp;" +  d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["crime"][index] + "<br>"+
    		"Business Bankruptcy Rate:&nbsp;&nbsp;" +  d3.select(".line."+stateinfo.data.properties.code)[0][0]["__data__"]["busBankr"][index]
-   		)//.style("font-size", "20px") 
+   		)//.style("font-size", "20px")
 
-   
+
 	//console.log(d3.select(".line."+data.properties.code)[0][0]["__data__"]["pop"][0] )
-	
-	
+
+
 }
 
 
@@ -120,7 +120,7 @@ function updateStateinfo(state, data){
 //  			</div>\
 //  		"}
 //  	});
-//  
+//
 //  $('#eventsBarChangeIndicatorDropdown').change(eventsBarChangeIndicator);
-//  
+//
 //  }

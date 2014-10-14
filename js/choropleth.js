@@ -5,7 +5,7 @@
 
 function initializeMap(json, statistic){
     map.zoomed = false;
-    map.statistic = statistic; 
+    map.statistic = statistic;
     map.oldstatelines = {};
     map.centered = null;
     map.projection = d3.geo.albersUsa()
@@ -31,18 +31,18 @@ function initializeMap(json, statistic){
 
     map.svg.append("text")
         .attr("class", "toptext")
-        .attr("x", (width.map / 2))             
+        .attr("x", (width.map / 2))
         .attr("y", 0 - (margin.map.top / 4) + 20)
-        .attr("text-anchor", "middle")  
-        .style("font-size", "18px") 
-        .style("font-weight", "bold")  
+        .attr("text-anchor", "middle")
+        .style("font-size", "18px")
+        .style("font-weight", "bold")
         .text(longgraphtitlest[monarchToLuciano[statistic]]);
 
 
 
     map.path = d3.geo.path()
         .projection(map.projection);
-    
+
     //declare domain for color Scale
 
     map.states = map.svg.selectAll("path")
@@ -60,14 +60,14 @@ function initializeMap(json, statistic){
                 tourla = d;
                 return "tourstate"
             }
-                
+
         })
         .on("click", zoom)
 
 
 ////////
 ///// start new changes
-       
+
 
 
         for (var i=0; i<colorRange.length; i++) {
@@ -89,7 +89,7 @@ function initializeMap(json, statistic){
         var max = 6.58;
         var key = (max - min) / (colorRange.length+1)
         var legendKeys = [min+key, min+2*key, min+3*key, min+4*key, min+5*key, min+6*key]
-        console.log(legendKeys)
+        //console.log(legendKeys)
 
         for (var i=0; i<colorRange.length; i++) {
             map.svg.append("text").attr({
@@ -97,8 +97,8 @@ function initializeMap(json, statistic){
                 "transform":"translate(" + (width.map-30) + "," + ((height.map-130) + 25*i) + ")",
                 "text-anchor":"end"
         })
-            
-            legendKeys[i] = Math.round(legendKeys[i]*100)/100 
+
+            legendKeys[i] = Math.round(legendKeys[i]*100)/100
             if (i == 0) {
                 d3.select("#bucket" +  i + "").attr("class" , "colorscale").text("< " + legendKeys[i])
             }
@@ -110,7 +110,7 @@ function initializeMap(json, statistic){
                 d3.select("#bucket" + i + "").attr("class" , "colorscale").text("> " + legendKeys[i])
             }
 
-        }   
+        }
 
         map.svg.append("text").text("").attr({
             "id": "legend_title",
@@ -172,16 +172,30 @@ var colorScale = d3.scale.quantize()
         map.statistic = statistic;
     else
         statistic = map.statistic;
-        
+
     colorScale.domain(parallel.minMax[statistic]);
 
         parallel.foreground
             .style("stroke", function(d,i){
 
             var newColor = colorScale(d[statistic]);
-            //console.log(newColor);
+            //console.log(d3.selectAll("path.map[data-statecode='"+d.code+"']"));
             d3.selectAll("path.map[data-statecode='"+d.code+"']")
-                .style("fill", ""+newColor);
+               .style("fill", ""+newColor);
+
+
+            // d3.selectAll("path.map[data-statecode='"+d.code+"']").style("display", "none")
+            // if( d3.selectAll("path.map[data-statecode='"+d.code+"']")[0][0]){
+            // 	$("path.map[data-statecode='"+d.code+"']")[0][0].offsetHeight
+            // }
+            // d3.selectAll("path.map[data-statecode='"+d.code+"']").style("display", "")
+							   // d3.selectAll("path.map[data-statecode='"+d.code+"']").get(0).offsetHeight;
+							   // d3.selectAll("path.map[data-statecode='"+d.code+"']").show();
+
+
+// 							   sel.style.display='none';
+// sel.offsetHeight; // no need to store this anywhere, the reference is enough
+// sel.style.display='';
             d3.selectAll("path.allstateline[line-statecode='"+d.code+"']")
                 .style("stroke", ""+newColor);
             return newColor;
@@ -219,7 +233,7 @@ var colorScale = d3.scale.quantize()
         }
 
         else {
-            legendKeys[i] = Math.round(legendKeys[i]*100)/100 
+            legendKeys[i] = Math.round(legendKeys[i]*100)/100
             if (i == 0) {
                 d3.select("#bucket" +  i + "").text("< " + legendKeys[i])
             }
@@ -243,6 +257,10 @@ var colorScale = d3.scale.quantize()
         d3.select("#legend_title").text(longgraphtitlest[monarchToLuciano[statistic]]).style("font-weight", "bolder");
         d3.select("#legend_info").text("(" + longgraphtitleen[monarchToLuciano[statistic]] + ")").style("font-weight", "boldest");
     }
+
+    console.log($(".state").css("fill"))
+    $(".state").hide().show(0)
+    console.log($(".state").css("fill"))
 
     //svg.select("#legendMin").text(d3.min(parallel.minMax[statistic]));
     //svg.select("#legendMax").text(d3.max(parallel.minMax[statistic]));
@@ -291,8 +309,8 @@ var colorScale = d3.scale.quantize()
 function zoom(d) {
   var x, y, k;
 
- 
-  
+
+
   // do not allow selection of states not brushed *fixes bug*
   if(!d3.select("[line-statecode="+d.properties.code+"]")[0][0].classList.contains("stateline")){
    if(map.zoomed){
@@ -304,42 +322,42 @@ function zoom(d) {
     })
     if(getout)
         return
-   }   
+   }
     else
         return
     }
 
-  
+
   if (d && map.centered !== d) {
-    
+
         //query NYTimes API
     runAQueryOn(d.properties.name);
-    
+
     d3.selectAll("[line-statecode="+d.properties.code+"]").classed("selectedline", false)
     d3.selectAll("[data-statecode=" +d.properties.code+"]").classed("selectedline", false)
    d3.selectAll("[line-statecode="+d.properties.code+"]").style("stroke-width", "5px")
-   
+
     // for whem we zoom out, we can bring them back
     if(map.zoomed == false){
         map.oldstatelines =  d3.selectAll(".stateline")
-        
-        
+
+
     }
-    
+
     map.oldstatelines.classed("stateline", function(s) {
             if(s.code == d.properties.code || s.code == "US" ){
-                return true;   
+                return true;
             }
             else
                 return false;
         });
-    
+
     var centroid = map.path.centroid(d);
     x = centroid[0];
     y = centroid[1];
     k = 4;
     map.centered = d;
-    
+
     d3.select("#eventsBar").classed("hidden", false);
      d3.select("#eventsBartitle").classed("hidden", false);
     d3.select("#svg-parallel").classed("hidden", true);
@@ -350,7 +368,7 @@ function zoom(d) {
     updateStateinfo(true, d)
     map.zoomed = true;
   } else {
-   
+
     updateStateinfo(false)
     map.oldstatelines.classed("stateline", true)
 
@@ -365,7 +383,7 @@ function zoom(d) {
     d3.select("#svg-parallel").classed("hidden", false);
 
     setTimeout(function() { d3.selectAll(".colorscale").classed("hidden", false); },500)
-    
+
     map.oldstatelines = {};
     map.zoomed = false;
   }

@@ -2,6 +2,8 @@
 /////////////////////////////////////////////
 //           Declare variables             //
 /////////////////////////////////////////////
+addLoading();
+
 //event controller
 var eventController = {};
 
@@ -11,7 +13,7 @@ var stateIdName = {}
 //stateData variable
 stateData = {};
 
-//dragging 
+//dragging
 var yearselector = {};
 
 var stateinfo = {};
@@ -61,10 +63,10 @@ var longgraphtitleen = {"unemp": "", "busBankr": "per 100,000 People", "crime": 
 var monarchToLuciano = {"Unemployment": "unemp", "busBankr": "busBankr", "burg_rate": "crime",
 "GSP": "gsp", "HomeownerRates": "home"}
 
-var spectrums = {"Unemployment": ["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#bd0026"], 
-"busBankr": ["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#d95f0e", "#993404"], 
+var spectrums = {"Unemployment": ["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#bd0026"],
+"busBankr": ["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#d95f0e", "#993404"],
 "burg_rate": ["#ffffcc", "#d9f0a3", "#addd8e", "#78c679", "#31a354", "#006837"],
-"GSP": ["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#c51b8a", "#7a0177"], 
+"GSP": ["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#c51b8a", "#7a0177"],
 "HomeownerRates": ["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#2c7fb8", "#253494"]}
 
 //evets
@@ -74,12 +76,13 @@ var events = {};
 var rainbow = new Rainbow();
 rainbow.length = 6;
 rainbow.setSpectrum(spectrums["Unemployment"][0], spectrums["Unemployment"][1], spectrums["Unemployment"][2], spectrums["Unemployment"][3], spectrums["Unemployment"][4], spectrums["Unemployment"][5]);
-rainbow.setNumberRange(0, rainbow.length); 
+rainbow.setNumberRange(0, rainbow.length);
 var colorRange = [];
 // rainbow.colourAt(number); // based on the numbers from your array, this would return the color you want
 for(i=0; i<rainbow.length; i++){
     colorRange.push(rainbow.colorAt(i+1));
 }
+
 // [].forEach(function(d,i){
 //     colorRange[i] = "remove";
 // })
@@ -91,7 +94,7 @@ for(i=0; i<rainbow.length; i++){
 var colorScale = d3.scale.quantize()
     .range(colorRange);
     // .range(["#000000","#222222", "#444444", "#666666", "#888888", "#AAAAAA", "#BBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"]);
-
+		console.log(colorRange[4])
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -139,17 +142,21 @@ var colorScale = d3.scale.quantize()
 //          Application startpoint         //
 /////////////////////////////////////////////
 
+$(window).load( function(){
 
-addLoading();
 queue()
     .defer(d3.json, "./data/us-named.json")
     .defer(d3.json, "./data/MonarchStyle5.json")
     .defer(d3.json, "./data/LucianoPlusID.json")
     .defer(d3.csv, "./data/eventsData.csv")
     .defer(d3.csv, "./data/stateFlagMe.csv")
-    // .defer(d3.csv, "../data/d3.csv")
+
     .await(main);
 clearLoading();
+})
+
+// window.setInterval(queuefiles(), 3000);
+
 
 function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag){
     try{
@@ -219,7 +226,7 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
                 d3.select("#eventsBar").custom_eventsBar_hideEventItems(metaDataObject);
             },
             showItems : function(metaDataObject){
-                d3.select("#eventsBar").custom_eventsBar_hideEventItems(metaDataObject);  
+                d3.select("#eventsBar").custom_eventsBar_hideEventItems(metaDataObject);
             },
             clearItems : function(){
                 d3.select("#eventsBar").custom_eventsBar_clearEventItems();
@@ -263,7 +270,7 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
                 //if parameters are passed
                 // console.log(this);
                 d3.select(this)
-                    //select all .eventItems and filter 
+                    //select all .eventItems and filter
                     .selectAll(".eventItem")
                     .filter(function(d,i){
                         var thisEvent = this;
@@ -273,8 +280,8 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
                         flags.indicators = {boolState: false, objectKey: "indicators"};
 
                         //iterate over each flag and hide the eventItem if the eventItem matches
-                        [flags.states, 
-                         flags.years, 
+                        [flags.states,
+                         flags.years,
                          flags.indicators]
                         .forEach(function(flag){
                             //if the flag is already true, or if the filter array wasn't provided in the object, skip this flag
@@ -310,7 +317,7 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
                 //if parameters are passed
                 // console.log(this);
                 d3.select(this)
-                    //select all .eventItems and filter 
+                    //select all .eventItems and filter
                     .selectAll(".eventItem")
                     .filter(function(d,i){
                         var thisEvent = this;
@@ -320,8 +327,8 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
                         flags.indicators = {boolState: false, objectKey: "indicators"};
 
                         //iterate over each flag and hide the eventItem if the eventItem matches
-                        [flags.states, 
-                         flags.years, 
+                        [flags.states,
+                         flags.years,
                          flags.indicators]
                         .forEach(function(flag){
                             //if the flag is already true, or if the filter array wasn't provided in the object, skip this flag
@@ -382,7 +389,7 @@ function main(error, usNamedJson, stateDataJson, complete, eventsData, stateflag
         hopscotch.startTour(tour);
     }catch(e){
         console.log(e.stack);
-    }  
+    }
 }
 
 
