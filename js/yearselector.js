@@ -28,10 +28,10 @@ function initializeYearSelector(json, json2){
 		updateStateinfo(true)
 
 
-	}	
+	}
 
 	function dragHandler(d){
-		console.log(event);
+		//console.log(event);
 		if(event.type=="mousedown"){yearselector.origin = {x : event.x, y: event.y}};
 		var element = document.elementFromPoint(event.x, yearselector.origin.y);
 		if(d3.select(element).classed("yearsquare")==true){

@@ -2,7 +2,7 @@ function initializeStateinfo(stateflag){
 
 
 	stateinfo = d3.select("#stateinfo");
-
+	stateinfo.style("height", $(window).height()/2)
 	stateinfo.classed("hidden", true);
 
 	//stateinfo.attr("class", "stateinfo")
@@ -58,12 +58,10 @@ function updateStateinfo(state, data){
 		stateinfo.year =  yearselector.year
 	}
 
-	//stateinfo.data = data
-	//stateinfo.selectAll(".title").clear()
-	//console.log(stateinfo.select(".statetitle"))
-	//console.log(data)
-	//console.log(stateinfo.flags)
-	//stateinfo.select(".stateinfo").html('')
+
+	// We are currently not showing a state
+	if(!stateinfo.data.properties)
+		return
 
 	stateinfo.select(".statetitle")
         .text(stateinfo.data.properties.name)

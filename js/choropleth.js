@@ -175,30 +175,19 @@ var colorScale = d3.scale.quantize()
 
     colorScale.domain(parallel.minMax[statistic]);
 
-        parallel.foreground
+    colors = ["red", "blue", "green"]
+      parallel.foreground
             .style("stroke", function(d,i){
 
             var newColor = colorScale(d[statistic]);
             //console.log(d3.selectAll("path.map[data-statecode='"+d.code+"']"));
             d3.selectAll("path.map[data-statecode='"+d.code+"']")
-               .style("fill", ""+newColor);
+               .style("fill", "#"+newColor);
 
 
-            // d3.selectAll("path.map[data-statecode='"+d.code+"']").style("display", "none")
-            // if( d3.selectAll("path.map[data-statecode='"+d.code+"']")[0][0]){
-            // 	$("path.map[data-statecode='"+d.code+"']")[0][0].offsetHeight
-            // }
-            // d3.selectAll("path.map[data-statecode='"+d.code+"']").style("display", "")
-							   // d3.selectAll("path.map[data-statecode='"+d.code+"']").get(0).offsetHeight;
-							   // d3.selectAll("path.map[data-statecode='"+d.code+"']").show();
-
-
-// 							   sel.style.display='none';
-// sel.offsetHeight; // no need to store this anywhere, the reference is enough
-// sel.style.display='';
             d3.selectAll("path.allstateline[line-statecode='"+d.code+"']")
-                .style("stroke", ""+newColor);
-            return newColor;
+                .style("stroke", "#"+newColor);
+            return "#"+newColor;
         });
 
     map.svg.select(".toptext").text(longgraphtitlest[monarchToLuciano[statistic]]);
@@ -216,7 +205,7 @@ var colorScale = d3.scale.quantize()
 
     for (var i=0; i<colorRange.length; i++) {
 
-                d3.select("#color" +  i + "").style("fill", function() { return colorRange[i]})
+                d3.select("#color" +  i + "").style("fill", function() { return "#"+colorRange[i]})
 
         if (statistic == "GSP") {
             legendKeys[i] = Math.round(legendKeys[i]);
@@ -258,9 +247,9 @@ var colorScale = d3.scale.quantize()
         d3.select("#legend_info").text("(" + longgraphtitleen[monarchToLuciano[statistic]] + ")").style("font-weight", "boldest");
     }
 
-    console.log($(".state").css("fill"))
-    $(".state").hide().show(0)
-    console.log($(".state").css("fill"))
+    // console.log($(".state").css("fill"))
+    // $(".state").hide().show(0)
+    // console.log($(".state").css("fill"))
 
     //svg.select("#legendMin").text(d3.min(parallel.minMax[statistic]));
     //svg.select("#legendMax").text(d3.max(parallel.minMax[statistic]));

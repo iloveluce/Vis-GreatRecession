@@ -334,6 +334,9 @@ width: 100%;
 .navbar-brand:hover{
   color: white !important;
 }
+.statetitle{
+	margin: 10px auto;
+}
 #stateinfo{
   position: relative;
  /* height:40%;*/

@@ -94,7 +94,7 @@ for(i=0; i<rainbow.length; i++){
 var colorScale = d3.scale.quantize()
     .range(colorRange);
     // .range(["#000000","#222222", "#444444", "#666666", "#888888", "#AAAAAA", "#BBBBBB", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#FFFFFF"]);
-		console.log(colorRange[4])
+
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -404,7 +404,7 @@ function declareMargins(){
         map: { top: 20, right: 0,  bottom: 20, left: 10 },
         parallel: { top: 40, right: 35, bottom: 10, left: 15},
         linegraph: { top: 20, right: 20,  bottom: 50, left: 115 },
-        smalllinegraph: { top: 50, right: 5,  bottom: 35, left: 50 },
+        smalllinegraph: { top: 50, right: 5,  bottom: 35, left: 37 },
         tooltip: { top: 5, right: 5,  bottom: 5, left: 5 },
         events: { top: 5, right: 5,  bottom: 5, left: 5 },
         stateinfo: { top: 5, right: 5,  bottom: 5, left: 5 }
@@ -414,7 +414,7 @@ function declareMargins(){
         map: $(window).width()/2 - margin.map.left - margin.map.right,
         parallel: $(window).width()/2 - margin.parallel.left - margin.parallel.right,
         linegraph: 1095 - margin.linegraph.left - margin.linegraph.right,
-        smalllinegraph: 310 - margin.smalllinegraph.left - margin.smalllinegraph.right,
+        smalllinegraph: $(window).width()/5 - margin.smalllinegraph.left - margin.smalllinegraph.right,
         tooltip: 100 - margin.tooltip.left - margin.tooltip.right,
         events: 300 - margin.tooltip.left - margin.tooltip.right,
         stateinfo: 300 - margin.stateinfo.left - margin.stateinfo.right
