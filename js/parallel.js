@@ -241,9 +241,8 @@ function initializeParallel(json, statistic){
         .text(function (d){
            return parallel.axistitle[d]
         })
-        .attr("id", function(d, i){
-            if(i == 3)
-                return "paxistitle"
+        .attr("class", function(d,i){
+        	return "paxistitle " + d
         });;
          // <button type = "button" class = "btn btn-success navbar-btn" id = "Crime">Crime</button>
 

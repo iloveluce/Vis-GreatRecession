@@ -41,7 +41,7 @@ function grossproduct(){
 	updateMapColors("GSP");
 }
 function activateModeButton(){
-	var targetButton = d3.select(event.target);
+	var targetButton = d3.select("#by_state");
 		if(targetButton.classed("activebutton")){
 			targetButton.classed("activebutton", false);
 		}
